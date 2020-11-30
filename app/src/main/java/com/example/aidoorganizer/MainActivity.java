@@ -36,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fab.hide();
 //                Intent intentDrugInfo = new Intent(MainActivity.this, ButtonsActivity.class);
 //                startActivity(intentDrugInfo);
+                fab.hide();
                 Fragment fragment= new ButtonsFragment();
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.nav_host_fragment, fragment);

@@ -48,7 +48,7 @@ public class ButtonsActivity extends AppCompatActivity {
     }
     public void btn_showMessage(View view){
         final AlertDialog.Builder alert = new AlertDialog.Builder(ButtonsActivity.this);
-        View mView = getLayoutInflater().inflate(R.layout.custom_dialog,null);
+        View mView = getLayoutInflater().inflate(R.layout.remind_dialog,null);
         final EditText txt_inputText = (EditText)mView.findViewById(R.id.txt_input);
         Button btn_cancel = (Button)mView.findViewById(R.id.btn_cancel);
         Button btn_okay = (Button)mView.findViewById(R.id.btn_okay);
@@ -70,4 +70,9 @@ public class ButtonsActivity extends AppCompatActivity {
         });
         alertDialog.show();
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
 }
