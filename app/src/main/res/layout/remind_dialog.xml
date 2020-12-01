@@ -4,52 +4,55 @@
     android:layout_height="match_parent"
     android:padding="15dp"
     android:layout_gravity="center_horizontal">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter your Message"
-        android:textSize="22sp"
-        android:textAlignment="center"
-        android:gravity="center_horizontal" />
+
     <EditText
         android:id="@+id/txt_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:hint="Enter your Message"
+        android:hint="Add Reminder"
         android:textSize="20sp" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/txt_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:hint="Select Date"
-        android:textSize="20sp" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SELECT DATE"
-        android:id="@+id/btn_date"
-        android:layout_alignBottom="@+id/txt_date"
-        android:layout_toRightOf="@+id/txt_date"
-        android:layout_toEndOf="@+id/txt_date" />
+        <EditText
+            android:id="@+id/txt_date"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Select Date"
+            android:textSize="18sp" />
 
-    <EditText
-        android:id="@+id/txt_time"
-        android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btn_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SET DATE"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:hint="Select Time"
-        android:textSize="20sp" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SELECT TIME"
-        android:id="@+id/btn_time"
-        android:layout_below="@+id/txt_time"
-        android:layout_alignLeft="@+id/txt_time"
-        android:layout_alignStart="@+id/txt_time" />
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/txt_time"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select Time "
+            android:layout_weight="1"
+            android:textSize="18sp" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SET TIME"
+            android:textSize="15sp"
+            android:id="@+id/btn_time" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
