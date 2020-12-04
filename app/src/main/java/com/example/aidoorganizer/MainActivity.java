@@ -58,21 +58,19 @@ public class MainActivity extends AppCompatActivity {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                Intent intentDrugInfo = new Intent(MainActivity.this, ButtonsActivity.class);
-//                startActivity(intentDrugInfo);
-                    fab.hide();
-                    Fragment fragment= new ButtonsFragment();
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.nav_host_fragment, fragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
+                    Intent intentDrugInfo = new Intent(MainActivity.this, ButtonsActivity.class);
+                    startActivity(intentDrugInfo);
+//                    fab.hide();
+//                    Fragment fragment= new ButtonsFragment();
+//                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//                    transaction.replace(R.id.nav_host_fragment, fragment);
+//                    transaction.addToBackStack(null);
+//                    transaction.commit();
                 }
             });
             // do reqired
 
         }
-
-        TableLayout tablayout = findViewById(R.id.layout);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
