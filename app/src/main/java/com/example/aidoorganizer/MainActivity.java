@@ -1,7 +1,9 @@
 package com.example.aidoorganizer;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.widget.TableLayout;
@@ -21,31 +23,57 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity {
+import com.evernote.client.android.EvernoteSession;
 
+public class MainActivity extends AppCompatActivity {
+    private static final String CONSUMER_KEY = "ahdynamics";
+    private static final String CONSUMER_SECRET = "4d5d38d635628401";
+    private static final EvernoteSession.EvernoteService EVERNOTE_SERVICE = EvernoteSession.EvernoteService.SANDBOX;
+    private static final boolean SUPPORT_APP_LINKED_NOTEBOOKS = true;
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TableLayout tablayout = findViewById(R.id.layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
+        String consumerKey = CONSUMER_KEY;
+        String consumerSecret = CONSUMER_SECRET;
+
+        EvernoteSession mEvernoteSession = new EvernoteSession.Builder(this)
+                .setEvernoteService(EVERNOTE_SERVICE)
+                .setSupportAppLinkedNotebooks(SUPPORT_APP_LINKED_NOTEBOOKS)
+                .build(consumerKey, consumerSecret)
+                .asSingleton();
+        mEvernoteSession.authenticate(this);
+        if (!EvernoteSession.getInstance().isLoggedIn()) {
+            Log.i("Logged in","Not Success");
+            return;
+        }
+        else{
+            Log.i("Logged in","Success");
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 //                Intent intentDrugInfo = new Intent(MainActivity.this, ButtonsActivity.class);
 //                startActivity(intentDrugInfo);
-                fab.hide();
-                Fragment fragment= new ButtonsFragment();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.nav_host_fragment, fragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
-            }
-        });
+                    fab.hide();
+                    Fragment fragment= new ButtonsFragment();
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.nav_host_fragment, fragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                }
+            });
+            // do reqired
+
+        }
+
+        TableLayout tablayout = findViewById(R.id.layout);
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -72,4 +100,23 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case EvernoteSession.REQUEST_CODE_LOGIN:
+                if (resultCode == Activity.RESULT_OK) {
+                    Log.i("onActivity result","success");
+                    // handle success
+                } else {
+                    Log.i("onActivity result","Failure");
+                    // handle failure
+                }
+                break;
+
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+                break;
+        }
+    }
+
 }
