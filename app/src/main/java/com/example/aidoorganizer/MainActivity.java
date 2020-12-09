@@ -48,10 +48,10 @@ public class MainActivity extends AppCompatActivity {
                 .setSupportAppLinkedNotebooks(SUPPORT_APP_LINKED_NOTEBOOKS)
                 .build(consumerKey, consumerSecret)
                 .asSingleton();
-        mEvernoteSession.authenticate(this);
+
         if (!EvernoteSession.getInstance().isLoggedIn()) {
             Log.i("Logged in","Not Success");
-            return;
+            mEvernoteSession.authenticate(this);
         }
         else{
             Log.i("Logged in","Success");
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 //                    transaction.commit();
                 }
             });
-            // do reqired
+//             do reqired
 
         }
 
